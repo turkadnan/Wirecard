@@ -7,10 +7,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SharedLibrary.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Wirecard.Core.Configuration;
 
 namespace Wirecard.API
 {
@@ -26,6 +28,11 @@ namespace Wirecard.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region Option Patterns
+            services.Configure<CustomTokenOption>(Configuration.GetSection("TokenOption"));            
+            services.Configure<Client>(Configuration.GetSection("Clients"));
+            //services.Configure<IEnumerable<Client>>(Configuration.GetSection("Clients"));
+            #endregion
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

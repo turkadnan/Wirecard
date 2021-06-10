@@ -12,7 +12,7 @@ using Wirecard.Core.UnitOfWork;
 
 namespace Wirecard.Service.Services
 {
-    public class GenericService<TEntity, TDto> : IGenericService<TEntity, TDto> where TEntity : class where TDto : class
+    public class GenericService<TEntity, TDto> : IGenericRepository<TEntity, TDto> where TEntity : class where TDto : class
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IGenericRepository<TEntity> _genericRepository;
