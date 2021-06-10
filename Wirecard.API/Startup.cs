@@ -29,9 +29,8 @@ namespace Wirecard.API
         public void ConfigureServices(IServiceCollection services)
         {
             #region Option Patterns
-            services.Configure<CustomTokenOption>(Configuration.GetSection("TokenOption"));            
-            services.Configure<Client>(Configuration.GetSection("Clients"));
-            //services.Configure<IEnumerable<Client>>(Configuration.GetSection("Clients"));
+            services.Configure<CustomTokenOption>(Configuration.GetSection("TokenOption"));                        
+            services.Configure<IEnumerable<Client>>(Configuration.GetSection("Clients"));
             #endregion
 
             services.AddControllers();
