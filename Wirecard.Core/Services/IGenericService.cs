@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Wirecard.Core.Services
 {
-    public interface IGenericRepository<TEntity, TDto> where TEntity : class where TDto : class
+    public interface IGenericService<TEntity, TDto> where TEntity : class where TDto : class
     {
         Task<Response<TDto>> GetByIdAsync(int id);
         Task<Response<IEnumerable<TDto>>> GetAllAsync();
