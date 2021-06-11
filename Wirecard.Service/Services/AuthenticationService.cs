@@ -34,7 +34,7 @@ namespace Wirecard.Service.Services
             _userRefreshTokenService = userRefreshTokenService;
         }
 
-        public async Task<Response<TokenDto>> CreateToken(LoginDto loginDto)
+        public async Task<Response<TokenDto>> CreateTokenAsync(LoginDto loginDto)
         {
             if (loginDto == null) throw new ArgumentNullException(nameof(loginDto));
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
@@ -82,7 +82,7 @@ namespace Wirecard.Service.Services
             return Response<ClientTokenDto>.Success(token, 200);
         }
 
-        public async Task<Response<TokenDto>> CreateTokenByRefreshToken(string refreshToken)
+        public async Task<Response<TokenDto>> CreateTokenByRefreshTokenAsync(string refreshToken)
         {
 
             var existRefreshToken = await _userRefreshTokenService.Where(x => x.Code == refreshToken).SingleOrDefaultAsync();
@@ -107,7 +107,7 @@ namespace Wirecard.Service.Services
 
         }
 
-        public async Task<Response<NoDataDto>> RevokeRefreshToken(string refreshToken)
+        public async Task<Response<NoDataDto>> RevokeRefreshTokenAsync(string refreshToken)
         {
             var existRefreshToken = await _userRefreshTokenService.Where(x => x.Code == refreshToken).SingleOrDefaultAsync();
             if (existRefreshToken == null)
