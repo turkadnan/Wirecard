@@ -39,21 +39,9 @@ namespace Wirecard.Business.Services
             return Convert.ToBase64String(byteNumber);
         }
 
-
-        private IEnumerable<Claim> GetClaimsByClient(Client client)
-        {
-            var claims = new List<Claim>();
-            claims.AddRange(client.Audiences.Select(x => new Claim(JwtRegisteredClaimNames.Aud, x)));
-            //Token Kimliği
-            claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Sub, client.Id.ToString()));
-
-            return claims;
-        }
-
         public TokenDto CreateToken(UserApp useApp)
         {
-            _tokenProvider = new JWTTokenProvider(_tokenOption);            
+            _tokenProvider = new NULLTokenProvider(_tokenOption);            
             return _tokenProvider.GetToken(useApp, CreateRefreshToken());
         }
 

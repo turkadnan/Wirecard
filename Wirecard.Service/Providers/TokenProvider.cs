@@ -115,8 +115,13 @@ namespace Wirecard.Business.Providers
         }
     }
 
-    public class NULLTokenProvider : ITokenProvider
+    public class NULLTokenProvider : ITokenProvider        
     {
+        private CustomTokenOption _tokenOption;
+        public NULLTokenProvider(CustomTokenOption tokenOption)
+        {
+            _tokenOption = tokenOption;
+        }
         public TokenDto GetToken(UserApp useApp, string refreshToken)
         {
             throw new NotImplementedException();
