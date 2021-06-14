@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SharedLibrary\SharedLibrary.csproj" />
-    <ProjectReference Include="..\Wirecard.Service\Wirecard.Service.csproj" />
+    <ProjectReference Include="..\Wirecard.Service\Wirecard.Business.csproj" />
   </ItemGroup>
 
 </Project>

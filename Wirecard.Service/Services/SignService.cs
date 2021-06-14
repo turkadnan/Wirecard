@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Wirecard.Service.Services
+namespace Wirecard.Business.Services
 {
     public static class SignService
     {

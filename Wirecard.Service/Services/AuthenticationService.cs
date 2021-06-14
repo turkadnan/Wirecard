@@ -14,7 +14,7 @@ using Wirecard.Core.Repositories;
 using Wirecard.Core.Services;
 using Wirecard.Core.UnitOfWork;
 
-namespace Wirecard.Service.Services
+namespace Wirecard.Business.Services
 {
     public class AuthenticationService : IAuthenticationService
     {

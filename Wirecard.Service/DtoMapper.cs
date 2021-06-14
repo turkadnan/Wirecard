@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Wirecard.Core.Dtos;
 using Wirecard.Core.Models;
 
-namespace Wirecard.Service
+namespace Wirecard.Business
 {
     class DtoMapper : Profile
     {

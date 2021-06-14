@@ -9,7 +9,7 @@ using Wirecard.Core.Dtos;
 using Wirecard.Core.Models;
 using Wirecard.Core.Services;
 
-namespace Wirecard.Service.Services
+namespace Wirecard.Business.Services
 {
     public class UserService : IUserService
     {

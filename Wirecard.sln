@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wirecard.Core", "Wirecard.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wirecard.Data", "Wirecard.Data\Wirecard.Data.csproj", "{76EEFBE1-0D50-4596-A646-3939C9191329}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wirecard.Service", "Wirecard.Service\Wirecard.Service.csproj", "{558E12CE-31DF-4FBD-9009-20A4B7E1D3D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wirecard.Business", "Wirecard.Service\Wirecard.Business.csproj", "{558E12CE-31DF-4FBD-9009-20A4B7E1D3D3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp1.API", "TestApp1.API\TestApp1.API.csproj", "{92C090BF-6CB3-4A22-AF30-29A5BEE56D03}"
 EndProject

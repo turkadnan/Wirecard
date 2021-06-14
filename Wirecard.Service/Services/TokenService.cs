@@ -13,14 +13,17 @@ using System.Threading.Tasks;
 using Wirecard.Core.Configuration;
 using Wirecard.Core.Dtos;
 using Wirecard.Core.Models;
+using Wirecard.Core.Providers;
 using Wirecard.Core.Services;
+using Wirecard.Business.Providers;
 
-namespace Wirecard.Service.Services
+namespace Wirecard.Business.Services
 {
     public class TokenService : ITokenService
     {
         private readonly UserManager<UserApp> _userManager;
         private readonly CustomTokenOption _tokenOption;
+        private ITokenProvider _tokenProvider;
 
         public TokenService(UserManager<UserApp> userManager, IOptions<CustomTokenOption> options)
         {
@@ -36,22 +39,6 @@ namespace Wirecard.Service.Services
             return Convert.ToBase64String(byteNumber);
         }
 
-        private IEnumerable<Claim> GetClaims(UserApp userApp, List<string> audiences)
-        {
-            var claimList = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier,userApp.Id),
-                //new Claim("Email",userApp.Email) // Buda bir kullanım
-                new Claim(JwtRegisteredClaimNames.Email,userApp.Email),
-                new Claim(ClaimTypes.Name,userApp.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-            };
-
-            //audiences ları JwtRegisteredClaimNames.Aud ile merge ediliyor
-            claimList.AddRange(audiences.Select(x => new Claim(JwtRegisteredClaimNames.Aud, x)));
-
-            return claimList;
-        }
 
         private IEnumerable<Claim> GetClaimsByClient(Client client)
         {
@@ -66,63 +53,14 @@ namespace Wirecard.Service.Services
 
         public TokenDto CreateToken(UserApp useApp)
         {
-            var accessTokenExpration = DateTime.Now.AddMinutes(_tokenOption.AccessTokenExpration);
-            var refreshTokenExpration = DateTime.Now.AddMinutes(_tokenOption.RefresfTokenExpration);
-
-            var securityKey = SignService.GetSymmetricSecurityKey(_tokenOption.SecurityKey);
-
-            SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
-            JwtSecurityToken jwtSecurityToken =
-                new JwtSecurityToken(
-                    issuer: _tokenOption.Issuer,
-                    expires: accessTokenExpration,
-                    notBefore: DateTime.Now,
-                    claims: GetClaims(useApp, _tokenOption.Audience),
-                    signingCredentials: signingCredentials
-                    );
-
-
-            var handler = new JwtSecurityTokenHandler();
-            var token = handler.WriteToken(jwtSecurityToken);
-
-            var tokenDto = new TokenDto
-            {
-                AccessToken = token,
-                RefreshToken = CreateRefreshToken(),
-                AccessTokenExpiration = accessTokenExpration,
-                RefreshTokenExpiration = refreshTokenExpration
-            };
-
-            return tokenDto;
+            _tokenProvider = new JWTTokenProvider(_tokenOption);            
+            return _tokenProvider.GetToken(useApp, CreateRefreshToken());
         }
 
         public ClientTokenDto CreateTokenByClient(Client client)
         {
-            var accessTokenExpration = DateTime.Now.AddMinutes(_tokenOption.AccessTokenExpration);
-
-            var securityKey = SignService.GetSymmetricSecurityKey(_tokenOption.SecurityKey);
-
-            SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
-            JwtSecurityToken jwtSecurityToken =
-                new JwtSecurityToken(
-                    issuer: _tokenOption.Issuer,
-                    expires: accessTokenExpration,
-                    notBefore: DateTime.Now,
-                    claims: GetClaimsByClient(client),
-                    signingCredentials: signingCredentials
-                    );
-
-
-            var handler = new JwtSecurityTokenHandler();
-            var token = handler.WriteToken(jwtSecurityToken);
-
-            var clientTokenDto = new ClientTokenDto
-            {
-                AccessToken = token,
-                AccessTokenExpiration = accessTokenExpration
-            };
-
-            return clientTokenDto;
+            _tokenProvider = new JWTTokenProvider(_tokenOption);
+            return _tokenProvider.GetTokenByClient(client);
         }
     }
 }

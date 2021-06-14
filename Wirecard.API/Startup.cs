@@ -22,7 +22,8 @@ using Wirecard.Core.Services;
 using Wirecard.Core.UnitOfWork;
 using Wirecard.Data;
 using Wirecard.Data.Repositories;
-using Wirecard.Service.Services;
+using Wirecard.Business.Services;
+using Wirecard.Core.Providers;
 
 namespace Wirecard.API
 {
