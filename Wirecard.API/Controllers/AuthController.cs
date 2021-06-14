@@ -42,7 +42,7 @@ namespace Wirecard.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTokenByRefreshToke(RefreshTokenDto refreshTokenDto)
+        public async Task<IActionResult> CreateTokenByRefreshToken(RefreshTokenDto refreshTokenDto)
         {
             var retVal = await _authenticationService.CreateTokenByRefreshTokenAsync(refreshTokenDto.RefreshToken);
             return CommonActionResult(retVal);

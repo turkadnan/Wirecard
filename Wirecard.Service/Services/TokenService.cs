@@ -41,7 +41,7 @@ namespace Wirecard.Business.Services
 
         public TokenDto CreateToken(UserApp useApp)
         {
-            _tokenProvider = new NULLTokenProvider(_tokenOption);            
+            _tokenProvider = new JWTTokenProvider(_tokenOption);            
             return _tokenProvider.GetToken(useApp, CreateRefreshToken());
         }
 

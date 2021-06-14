@@ -52,7 +52,7 @@ namespace Wirecard.Business.Services
 
         }
 
-        public async Task<Response<NoDataDto>> Remove(int id)
+        public async Task<Response<NoDataDto>> RemoveAsync(int id)
         {
             var isRecordExist = await _genericRepository.GetByIdAsync(id);
             if (isRecordExist == null)
@@ -67,7 +67,7 @@ namespace Wirecard.Business.Services
 
         }
 
-        public async Task<Response<NoDataDto>> Update(TDto entity, int id)
+        public async Task<Response<NoDataDto>> UpdateAsync(TDto entity, int id)
         {
             var isRecordExist = await _genericRepository.GetByIdAsync(id);
             if (isRecordExist == null)

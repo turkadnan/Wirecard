@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Wirecard.Core.Models
 {
-    public class Product
+    public class Country
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Decimal Price { get; set; }
         public string UserId { get; set; }
     }
 }

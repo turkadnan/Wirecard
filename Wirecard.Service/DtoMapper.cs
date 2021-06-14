@@ -13,7 +13,7 @@ namespace Wirecard.Business
     {
         public DtoMapper()
         {
-            CreateMap<ProductDto, Product>().ReverseMap();
+            CreateMap<CountryDto, Country>().ReverseMap();
             CreateMap<UserAppDto, UserApp>().ReverseMap();
         }
     }
