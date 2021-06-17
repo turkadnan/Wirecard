@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedLibrary.Configurations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -12,7 +13,9 @@ namespace Wirecard.Core.Providers
 {
     public interface ITokenProvider
     {
-        TokenDto GetToken(UserApp useApp, string refreshToken);
-        ClientTokenDto GetTokenByClient(Client client);
+        TokenDto GetToken(UserApp useApp, string refreshToken, CustomTokenOption tokenOption);
+        ClientTokenDto GetTokenByClient(Client client, CustomTokenOption tokenOption);
+
     }
+
 }

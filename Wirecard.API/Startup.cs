@@ -24,6 +24,7 @@ using Wirecard.Data;
 using Wirecard.Data.Repositories;
 using Wirecard.Business.Services;
 using Wirecard.Core.Providers;
+using Wirecard.Business.Providers;
 
 namespace Wirecard.API
 {
@@ -45,9 +46,12 @@ namespace Wirecard.API
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            services.AddScoped<ITokenProvider, JWTTokenProvider>();
+
             //Generic Interface Bildirimi
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
+
             #endregion
 
             #region Option Patterns

@@ -15,4 +15,7 @@ namespace Wirecard.Core.Services
 
         ClientTokenDto CreateTokenByClient(Client client);
     }
+
+    
+
 }

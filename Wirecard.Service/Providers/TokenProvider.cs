@@ -15,14 +15,9 @@ using Wirecard.Business.Services;
 
 namespace Wirecard.Business.Providers
 {
+
     public class JWTTokenProvider : ITokenProvider
     {
-        private CustomTokenOption _tokenOption;
-
-        public JWTTokenProvider(CustomTokenOption tokenOption)
-        {
-            _tokenOption= tokenOption;
-        }
 
         private IEnumerable<Claim> GetClaims(UserApp userApp, List<string> audiences)
         {
@@ -51,21 +46,21 @@ namespace Wirecard.Business.Providers
             return claims;
         }
 
-        public TokenDto GetToken(UserApp useApp,string refreshToken)
+        public TokenDto GetToken(UserApp useApp,string refreshToken, CustomTokenOption tokenOption)
         {
 
-            var accessTokenExpration = DateTime.Now.AddMinutes(_tokenOption.AccessTokenExpration);
-            var refreshTokenExpration = DateTime.Now.AddMinutes(_tokenOption.RefresfTokenExpration);
+            var accessTokenExpration = DateTime.Now.AddMinutes(tokenOption.AccessTokenExpration);
+            var refreshTokenExpration = DateTime.Now.AddMinutes(tokenOption.RefresfTokenExpration);
 
-            var securityKey = SignService.GetSymmetricSecurityKey(_tokenOption.SecurityKey);
+            var securityKey = SignService.GetSymmetricSecurityKey(tokenOption.SecurityKey);
 
             SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
             JwtSecurityToken jwtSecurityToken =
                 new JwtSecurityToken(
-                    issuer: _tokenOption.Issuer,
+                    issuer: tokenOption.Issuer,
                     expires: accessTokenExpration,
                     notBefore: DateTime.Now,
-                    claims: GetClaims(useApp, _tokenOption.Audience),
+                    claims: GetClaims(useApp, tokenOption.Audience),
                     signingCredentials: signingCredentials
                     );
 
@@ -85,16 +80,16 @@ namespace Wirecard.Business.Providers
             return tokenDto;
         }
 
-        public ClientTokenDto GetTokenByClient(Client client)
+        public ClientTokenDto GetTokenByClient(Client client, CustomTokenOption tokenOption)
         {
-            var accessTokenExpration = DateTime.Now.AddMinutes(_tokenOption.AccessTokenExpration);
+            var accessTokenExpration = DateTime.Now.AddMinutes(tokenOption.AccessTokenExpration);
 
-            var securityKey = SignService.GetSymmetricSecurityKey(_tokenOption.SecurityKey);
+            var securityKey = SignService.GetSymmetricSecurityKey(tokenOption.SecurityKey);
 
             SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
             JwtSecurityToken jwtSecurityToken =
                 new JwtSecurityToken(
-                    issuer: _tokenOption.Issuer,
+                    issuer: tokenOption.Issuer,
                     expires: accessTokenExpration,
                     notBefore: DateTime.Now,
                     claims: GetClaimsByClient(client),
@@ -115,21 +110,16 @@ namespace Wirecard.Business.Providers
         }
     }
 
-    public class NULLTokenProvider : ITokenProvider        
+    public class NULLTokenProvider : ITokenProvider
     {
-        private CustomTokenOption _tokenOption;
-        public NULLTokenProvider(CustomTokenOption tokenOption)
+        public TokenDto GetToken(UserApp useApp, string refreshToken, CustomTokenOption tokenOption)
         {
-            _tokenOption = tokenOption;
-        }
-        public TokenDto GetToken(UserApp useApp, string refreshToken)
-        {
-            throw new NotImplementedException();
+            return new TokenDto();
         }
 
-        public ClientTokenDto GetTokenByClient(Client client)
+        public ClientTokenDto GetTokenByClient(Client client, CustomTokenOption tokenOption)
         {
-            throw new NotImplementedException();
+            return new ClientTokenDto();
         }
     }
 }

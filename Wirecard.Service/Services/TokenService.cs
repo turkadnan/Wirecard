@@ -23,12 +23,13 @@ namespace Wirecard.Business.Services
     {
         private readonly UserManager<UserApp> _userManager;
         private readonly CustomTokenOption _tokenOption;
-        private ITokenProvider _tokenProvider;
+        private readonly ITokenProvider _tokenProvider;
 
-        public TokenService(UserManager<UserApp> userManager, IOptions<CustomTokenOption> options)
+        public TokenService(UserManager<UserApp> userManager, IOptions<CustomTokenOption> options, ITokenProvider tokenProvider)
         {
             _userManager = userManager;
             _tokenOption = options.Value;
+            _tokenProvider = tokenProvider;
         }
 
         private string CreateRefreshToken()
@@ -41,14 +42,12 @@ namespace Wirecard.Business.Services
 
         public TokenDto CreateToken(UserApp useApp)
         {
-            _tokenProvider = new JWTTokenProvider(_tokenOption);            
-            return _tokenProvider.GetToken(useApp, CreateRefreshToken());
+            return _tokenProvider.GetToken(useApp, CreateRefreshToken(), _tokenOption);
         }
 
         public ClientTokenDto CreateTokenByClient(Client client)
         {
-            _tokenProvider = new JWTTokenProvider(_tokenOption);
-            return _tokenProvider.GetTokenByClient(client);
+            return _tokenProvider.GetTokenByClient(client, _tokenOption);
         }
     }
 }
