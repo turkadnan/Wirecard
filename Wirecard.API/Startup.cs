@@ -27,6 +27,7 @@ using Wirecard.Core.Providers;
 using Wirecard.Business.Providers;
 using SharedLibrary.Services;
 using SharedLibrary.Extensions;
+using FluentValidation.AspNetCore;
 
 namespace Wirecard.API
 {
@@ -88,7 +89,21 @@ namespace Wirecard.API
             #endregion
 
 
-            services.AddControllers();
+
+            //Fluent Validation Eklendiği için değiştirildi.
+            //services.AddControllers();
+
+            services.AddControllers().AddFluentValidation(options =>
+            {
+                options.RegisterValidatorsFromAssemblyContaining<Startup>();
+            });
+
+
+            #region Fluent gibi api de kullanılacak hata mesajlarını kendi hazırladığımız response tipinden dönmek için errore ü eziyoruz
+            services.UseCustomValidationResponse();
+            #endregion
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Wirecard.API", Version = "v1" });

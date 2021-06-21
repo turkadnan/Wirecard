@@ -57,6 +57,7 @@ namespace TestApp1.API
             //Token base işlemler için bu eklenmeli!
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
