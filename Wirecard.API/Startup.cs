@@ -28,6 +28,7 @@ using Wirecard.Business.Providers;
 using SharedLibrary.Services;
 using SharedLibrary.Extensions;
 using FluentValidation.AspNetCore;
+using Wirecard.Business.Extensions;
 
 namespace Wirecard.API
 {
@@ -44,16 +45,7 @@ namespace Wirecard.API
         public void ConfigureServices(IServiceCollection services)
         {
             #region Dependency Injection (DI) register
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            services.AddScoped<ITokenProvider, JWTTokenProvider>();
-
-            //Generic Interface Bildirimi
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
+            services.AddCustomScopes();            
 
             #endregion
 
