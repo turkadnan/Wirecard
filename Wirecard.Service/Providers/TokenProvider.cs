@@ -12,6 +12,7 @@ using Wirecard.Core.Dtos;
 using Wirecard.Core.Models;
 using Wirecard.Core.Providers;
 using Wirecard.Business.Services;
+using SharedLibrary.Services;
 
 namespace Wirecard.Business.Providers
 {

@@ -25,6 +25,8 @@ using Wirecard.Data.Repositories;
 using Wirecard.Business.Services;
 using Wirecard.Core.Providers;
 using Wirecard.Business.Providers;
+using SharedLibrary.Services;
+using SharedLibrary.Extensions;
 
 namespace Wirecard.API
 {
@@ -81,33 +83,8 @@ namespace Wirecard.API
             #endregion
 
             #region Token base authentication Assignment (Gelen tokunun doğruluğunu kontrol eden bilgirimler)
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-
-            }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
-            {
-                var tokenOptions = Configuration.GetSection("TokenOption").Get<CustomTokenOption>();
-
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
-                {
-                    ValidIssuer = tokenOptions.Issuer,
-                    ValidAudience = tokenOptions.Audience[0],
-                    IssuerSigningKey = SignService.GetSymmetricSecurityKey(tokenOptions.SecurityKey),
-
-
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = true,
-                    ValidateLifetime = true,
-
-                    //Farklı serverlardaki zone dan oluşan zaman farkını gidermek için Identity 5 dk fazla süre verir. Bunu kapatmak istersek "ClockSkew=TimeSpan.Zero" bildirimini yapabiliriz
-                    ClockSkew = TimeSpan.Zero
-
-                };
-
-
-            });
+            var tokenOptions = Configuration.GetSection("TokenOption").Get<CustomTokenOption>();
+            services.AddCustomTokenAuth(tokenOptions);
             #endregion
 
 
@@ -131,6 +108,7 @@ namespace Wirecard.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            //Token base işlemler için bu eklenmeli!
             app.UseAuthentication();
             app.UseAuthorization();
 
