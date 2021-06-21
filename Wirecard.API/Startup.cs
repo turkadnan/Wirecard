@@ -52,6 +52,8 @@ namespace Wirecard.API
             #region Option Patterns
             services.Configure<CustomTokenOption>(Configuration.GetSection("TokenOption"));
             services.Configure<IEnumerable<Client>>(Configuration.GetSection("Clients"));
+
+            var aa = Configuration.GetSection("TokenOption");
             #endregion
 
             #region DbContext
