@@ -9,7 +9,7 @@ namespace Wirecard.Core.Configuration
     public class Client
     {
         public string Id { get; set; }
-        public string Screet { get; set; }
+        public string Secret { get; set; }
 
         /// <summary>
         /// Erişebileceği API listesi tutulacak. örn wwww.api1.com, wwww.api2.com

@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ClientAPITest.Controllers
@@ -28,14 +30,33 @@ namespace ClientAPITest.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+
+            var JtiClaim = User.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti);
+
+
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+
+
+            var weathers = Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+
+            weathers.SetValue(
+
+                new WeatherForecast
+                {
+                    Date = DateTime.Now,
+                    TemperatureC = rng.Next(-20, 55),
+                    Summary = JtiClaim.Value
+                },
+                weathers.Length - 1
+                );
+
+            return weathers;
         }
     }
 }

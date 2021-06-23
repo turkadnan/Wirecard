@@ -71,7 +71,7 @@ namespace Wirecard.Business.Services
 
         public Response<ClientTokenDto> CreateTokenByClient(ClientLoginDto clientLoginDto)
         {
-            var client = _clients.SingleOrDefault(x => x.Id == clientLoginDto.ClientId && x.Screet == clientLoginDto.ClientScreet);
+            var client = _clients.SingleOrDefault(x => x.Id == clientLoginDto.ClientId && x.Secret == clientLoginDto.ClientSecret);
             if (client == null)
             {
                 return Response<ClientTokenDto>.Fail("ClientId or ClientSecret not found.", 404, true);
