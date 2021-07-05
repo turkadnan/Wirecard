@@ -11,6 +11,35 @@ using Wirecard.Core.Services;
 
 namespace Wirecard.Business.Services
 {
+    public class NULLUserService : IUserService
+    {
+        public async Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto createUserDto)
+        {
+
+            var user = new UserApp
+            {
+                Email = "ali haldun@",
+                UserName = "ali haldun"
+            };
+
+
+
+            return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(user), 200);
+        }
+
+        public async Task<Response<UserAppDto>> GetUserByNameAync(string userName)
+        {
+            var user = new UserApp
+            {
+                Email = "ali haldun@",
+                UserName = "ali haldun"
+            };
+
+
+
+            return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(user), 200);
+        }
+    }
     public class UserService : IUserService
     {
         private readonly UserManager<UserApp> _userManager;

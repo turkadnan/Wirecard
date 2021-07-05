@@ -29,6 +29,9 @@ using SharedLibrary.Services;
 using SharedLibrary.Extensions;
 using FluentValidation.AspNetCore;
 using Wirecard.Business.Extensions;
+using Autofac;
+using Wirecard.Business.Commands;
+using Wirecard.CommandFramework;
 
 namespace Wirecard.API
 {
@@ -45,8 +48,10 @@ namespace Wirecard.API
         public void ConfigureServices(IServiceCollection services)
         {
             #region Dependency Injection (DI) register
-            services.AddCustomScopes();            
+            services.AddCustomScopes();
 
+
+            services.AddSingleton<ICompositionRoot, AutoFacCompositionRoot>();
             #endregion
 
             #region Option Patterns

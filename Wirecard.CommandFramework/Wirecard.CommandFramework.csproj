@@ -5,13 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Autofac" Version="6.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wirecard.CommandFramework\Wirecard.CommandFramework.csproj" />
     <ProjectReference Include="..\Wirecard.Core\Wirecard.Core.csproj" />
-    <ProjectReference Include="..\Wirecard.Data\Wirecard.Data.csproj" />
   </ItemGroup>
 
 </Project>

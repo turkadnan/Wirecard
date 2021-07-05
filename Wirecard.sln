@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp1.API", "TestApp1.AP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLibrary", "SharedLibrary\SharedLibrary.csproj", "{83420741-7243-4CC6-A5DC-8A4A1137A365}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientAPITest", "ClientAPITest\ClientAPITest.csproj", "{59DF80F4-8CD7-4EC9-9E2D-CEC249F34A7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientAPITest", "ClientAPITest\ClientAPITest.csproj", "{59DF80F4-8CD7-4EC9-9E2D-CEC249F34A7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wirecard.CommandFramework", "Wirecard.CommandFramework\Wirecard.CommandFramework.csproj", "{D6FE7F52-CC93-490A-B406-49CDBF4E69BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{59DF80F4-8CD7-4EC9-9E2D-CEC249F34A7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59DF80F4-8CD7-4EC9-9E2D-CEC249F34A7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59DF80F4-8CD7-4EC9-9E2D-CEC249F34A7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6FE7F52-CC93-490A-B406-49CDBF4E69BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6FE7F52-CC93-490A-B406-49CDBF4E69BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6FE7F52-CC93-490A-B406-49CDBF4E69BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6FE7F52-CC93-490A-B406-49CDBF4E69BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
