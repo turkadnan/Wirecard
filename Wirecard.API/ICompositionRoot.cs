@@ -27,7 +27,7 @@ namespace Wirecard.API
 
             builder.RegisterType<NULLCommandLogger>().As<ICommandLogger>();
 
-            builder.RegisterType<UserService>().As<IUserService>();
+            builder.RegisterType<NULLUserService>().As<IUserService>();
 
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>();
 

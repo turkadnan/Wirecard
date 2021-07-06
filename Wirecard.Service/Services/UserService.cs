@@ -36,7 +36,6 @@ namespace Wirecard.Business.Services
             };
 
 
-
             return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(user), 200);
         }
     }

@@ -36,15 +36,5 @@ namespace Wirecard.Business.Extensions
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
         }
-
-        //public static IServiceProvider AutoFacInstanse(this IServiceCollection services)
-        //{
-        //    var builder = new ContainerBuilder();
-        //    builder.RegisterType<GetUserCommandHandler>().As<ICommandHandler<GetUserCommand, GetUserResult>>();
-        //    builder.(services);
-        //    var appContainer = builder.Build();
-
-        //    return new AutofacServiceProvider(appContainer);
-        //}
     }
 }
